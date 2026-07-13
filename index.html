@@ -183,11 +183,9 @@ footer a:hover { color: var(--accent-light); }
     <div class="project-grid">
 
       <div class="project-card">
-        <!-- Collage of two screenshots side by side -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border);">
-          <img src="lpms-loadplan.png" alt="Load plan trailer view" style="width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top;display:block;border-right:1px solid var(--border);">
-          <img src="lpms-driver.png" alt="Forklift driver steps" style="width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top;display:block;">
-        </div>
+        <video autoplay loop muted playsinline style="width:100%;display:block;border-bottom:1px solid var(--border);">
+          <source src="lpms-demo.mp4" type="video/mp4">
+        </video>
         <div class="project-body">
           <div class="project-top">
             <span class="project-name">Load Planning Management System</span>
