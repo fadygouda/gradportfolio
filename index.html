@@ -1,1 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fady Gouda — Software Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+:root {
+  --bg: #080c0b;
+  --surface: #0f1410;
+  --border: #1e2a24;
+  --text: #e8f0ec;
+  --muted: #6b8a78;
+  --accent: #1D9E75;
+  --accent-light: #5DCAA5;
+  --radius: 12px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent-light); text-decoration: none; }
+a:hover { color: var(--accent); }
+
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(8, 12, 11, 0.94);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-name { font-weight: 500; font-size: 15px; color: var(--text); }
+.nav-links { display: flex; gap: 1.5rem; }
+.nav-links a { font-size: 14px; color: var(--muted); transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+
+.container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+section { padding: 5rem 0; border-top: 1px solid var(--border); }
+.section-label {
+  font-size: 12px; font-weight: 500; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem;
+}
+.section-title { font-size: 1.8rem; font-weight: 600; color: #fff; margin-bottom: 2.5rem; }
+
+.hero { padding: 7rem 2rem 5rem; max-width: 900px; margin: 0 auto; }
+.hero-tag {
+  display: inline-block; font-size: 13px; font-weight: 500;
+  color: var(--accent); background: rgba(29, 158, 117, 0.1);
+  border: 1px solid rgba(29, 158, 117, 0.25);
+  padding: 4px 14px; border-radius: 999px; margin-bottom: 1.5rem;
+}
+.hero h1 {
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 600; line-height: 1.12; margin-bottom: 1rem; color: #fff;
+}
+.hero-sub {
+  font-size: 1.05rem; color: var(--muted); max-width: 540px;
+  line-height: 1.75; margin-bottom: 2rem;
+}
+.hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 20px; border-radius: 8px; font-size: 14px;
+  font-weight: 500; cursor: pointer; transition: all 0.18s;
+  font-family: inherit; text-decoration: none;
+}
+.btn-primary { background: var(--accent); color: #fff; border: none; }
+.btn-primary:hover { background: #17875f; color: #fff; }
+.btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+.btn-outline:hover { border-color: var(--muted); color: #fff; }
+
+.project-grid { display: flex; flex-direction: column; gap: 1.25rem; }
+.project-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; transition: border-color 0.2s;
+}
+.project-card:hover { border-color: rgba(29, 158, 117, 0.35); }
+.project-img {
+  width: 100%; aspect-ratio: 16/7; object-fit: cover;
+  border-bottom: 1px solid var(--border); display: block;
+}
+.project-img-placeholder {
+  width: 100%; aspect-ratio: 16/7;
+  background: #0f1a15;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  color: #2a3d34; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+}
+.project-body { padding: 1.5rem 1.75rem; }
+.project-top {
+  display: flex; align-items: flex-start;
+  justify-content: space-between; gap: 1rem; margin-bottom: 0.6rem;
+}
+.project-name { font-size: 1.05rem; font-weight: 600; color: #fff; }
+.project-links { display: flex; gap: 12px; flex-shrink: 0; }
+.project-link { font-size: 13px; color: var(--muted); transition: color 0.2s; }
+.project-link:hover { color: var(--accent-light); }
+.project-desc { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 1rem; }
+.project-highlight {
+  font-size: 13px; color: var(--accent-light);
+  border-left: 2px solid var(--accent);
+  background: rgba(29,158,117,0.07);
+  padding: 8px 12px; border-radius: 0 6px 6px 0; margin-bottom: 1rem;
+}
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  font-size: 12px; padding: 3px 10px; border-radius: 999px;
+  background: rgba(255,255,255,0.04); color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+.skills-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2rem;
+}
+.skill-group h3 {
+  font-size: 12px; font-weight: 500; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem;
+}
+.skill-list { display: flex; flex-direction: column; gap: 7px; }
+.skill-item { font-size: 14px; color: var(--muted); }
+
+.exp-list { display: flex; flex-direction: column; }
+.exp-item { display: flex; gap: 1.25rem; }
+.exp-line { display: flex; flex-direction: column; align-items: center; padding-top: 5px; }
+.exp-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.exp-stem { width: 1px; background: var(--border); flex: 1; margin-top: 6px; min-height: 24px; }
+.exp-item:last-child .exp-stem { display: none; }
+.exp-content { flex: 1; padding-bottom: 2.25rem; }
+.exp-role { font-weight: 500; font-size: 15px; color: #fff; }
+.exp-company { font-size: 14px; color: var(--accent-light); margin-top: 2px; }
+.exp-date { font-size: 13px; color: var(--muted); margin: 5px 0 8px; }
+.exp-desc { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+footer {
+  border-top: 1px solid var(--border); padding: 2.5rem 2rem;
+  text-align: center; font-size: 13px; color: var(--muted);
+}
+footer a { color: var(--muted); }
+footer a:hover { color: var(--accent-light); }
+
+@media (max-width: 640px) {
+  nav { padding: 0.875rem 1rem; }
+  .hero { padding: 4rem 1rem 3rem; }
+  .container { padding: 0 1rem; }
+  .project-body { padding: 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Fady Gouda</span>
+  <div class="nav-links">
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">Open to opportunities</div>
+  <h1>Full Stack<br>Software Engineer</h1>
+  <p class="hero-sub">I build end-to-end systems — React frontends, REST APIs, C++ optimization engines, and AI agent pipelines. Based in Southern California.</p>
+  <div class="hero-actions">
+    <a href="https://github.com/fadygouda" class="btn btn-primary" target="_blank">↗ GitHub</a>
+    <a href="https://www.linkedin.com/in/gouda-93/" class="btn btn-outline" target="_blank">LinkedIn</a>
+    <a href="mailto:fadygouda123@gmail.com" class="btn btn-outline">Contact</a>
+  </div>
+</div>
+
+<section id="projects">
+  <div class="container">
+    <p class="section-label">Work</p>
+    <h2 class="section-title">Projects</h2>
+    <div class="project-grid">
+
+      <div class="project-card">
+        <!-- Collage of two screenshots side by side -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border);">
+          <img src="lpms-loadplan.png" alt="Load plan trailer view" style="width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top;display:block;border-right:1px solid var(--border);">
+          <img src="lpms-driver.png" alt="Forklift driver steps" style="width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top;display:block;">
+        </div>
+        <div class="project-body">
+          <div class="project-top">
+            <span class="project-name">Load Planning Management System</span>
+            <div class="project-links">
+              <a href="https://github.com/fadygouda" class="project-link" target="_blank">↗ GitHub</a>
+            </div>
+          </div>
+          <p class="project-desc">Full-stack outbound warehouse planning platform built in partnership with Item LLC for UC Riverside's Senior Design Program. Manages multi-stop delivery sequencing, pallet placement optimization, and pre-dispatch risk assessment across real trailer configurations.</p>
+          <div class="project-highlight">C++ load planning solver generates LIFO-compliant pallet layouts — augmented by a 14-step AI agent pipeline running on a local LLM (Ollama / LLaVA).</div>
+          <div class="tags">
+            <span class="tag">React</span>
+            <span class="tag">Node.js / Express</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">C++</span>
+            <span class="tag">Python / XGBoost</span>
+            <span class="tag">AI Agent</span>
+            <span class="tag">Docker</span>
+            <span class="tag">Render</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-img-placeholder">screenshot</div>
+        <div class="project-body">
+          <div class="project-top">
+            <span class="project-name">The Unbound NFT</span>
+            <div class="project-links">
+              <a href="https://opensea.io/collection/the-unbound-phantom-collection" class="project-link" target="_blank">↗ OpenSea</a>
+            </div>
+          </div>
+          <p class="project-desc">Built the complete technical stack for an original NFT IP — minting website, ERC721A smart contract with enforced royalties via ERC2981 and OperatorFilterer, and a procedural art generation pipeline spanning 10 character archetypes with a rarity system.</p>
+          <div class="tags">
+            <span class="tag">React</span>
+            <span class="tag">Solidity</span>
+            <span class="tag">ERC721A</span>
+            <span class="tag">Web3.js</span>
+            <span class="tag">Ethereum</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-img-placeholder">screenshot</div>
+        <div class="project-body">
+          <div class="project-top">
+            <span class="project-name">Incrementum NFT</span>
+            <div class="project-links">
+              <a href="https://www.incrementumnft.com" class="project-link" target="_blank">↗ Live</a>
+            </div>
+          </div>
+          <p class="project-desc">React minting website for Incrementum NFT LLC, integrated with Solidity smart contracts. Collaborated with Solidity developers on contract-to-frontend integration across two collection phases.</p>
+          <div class="project-highlight">Phase 1 sold out in under 20 minutes — $480,000 raised. 10% donated to One Tree Planted.</div>
+          <div class="tags">
+            <span class="tag">React</span>
+            <span class="tag">Web3.js</span>
+            <span class="tag">Solidity</span>
+            <span class="tag">Ethereum</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <p class="section-label">Stack</p>
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h3>Frontend</h3>
+        <div class="skill-list">
+          <span class="skill-item">React / Vite</span>
+          <span class="skill-item">JavaScript / TypeScript</span>
+          <span class="skill-item">HTML / CSS</span>
+          <span class="skill-item">Web3.js</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Backend</h3>
+        <div class="skill-list">
+          <span class="skill-item">Node.js / Express</span>
+          <span class="skill-item">PostgreSQL / Knex</span>
+          <span class="skill-item">REST APIs</span>
+          <span class="skill-item">JWT Auth</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Systems</h3>
+        <div class="skill-list">
+          <span class="skill-item">C++ (CMake, GTest)</span>
+          <span class="skill-item">Python</span>
+          <span class="skill-item">Valgrind / LCOV</span>
+          <span class="skill-item">Solidity / EVM</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>AI / Infra</h3>
+        <div class="skill-list">
+          <span class="skill-item">Ollama / LLaVA (VLM)</span>
+          <span class="skill-item">LLM Agent Pipelines</span>
+          <span class="skill-item">Docker</span>
+          <span class="skill-item">Render / CI</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+    <p class="section-label">Background</p>
+    <h2 class="section-title">Experience</h2>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div class="exp-line"><div class="exp-dot"></div><div class="exp-stem"></div></div>
+        <div class="exp-content">
+          <div class="exp-role">Senior Design Engineer</div>
+          <div class="exp-company">UC Riverside × Item LLC</div>
+          <div class="exp-date">Jan 2026 – Jun 2026</div>
+          <div class="exp-desc">Built a production-grade warehouse planning platform end-to-end: React/Vite frontend, Node.js/Express/PostgreSQL backend, C++ optimization engine, Python ML pipeline, and a local LLM agent layer. Deployed to Render with database migrations and automated workflows.</div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-line"><div class="exp-dot"></div><div class="exp-stem"></div></div>
+        <div class="exp-content">
+          <div class="exp-role">Software Engineer</div>
+          <div class="exp-company">The Unbound NFT</div>
+          <div class="exp-date">Dec 2022 – Jun 2023</div>
+          <div class="exp-desc">Developed website, ERC721A smart contract, and procedural art generation for an original NFT IP. Engineered royalty enforcement via ERC2981 and OperatorFilterer.</div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-line"><div class="exp-dot"></div><div class="exp-stem"></div></div>
+        <div class="exp-content">
+          <div class="exp-role">Frontend Web Developer</div>
+          <div class="exp-company">Incrementum NFT</div>
+          <div class="exp-date">Aug 2021 – Nov 2021</div>
+          <div class="exp-desc">Built the minting website for Incrementum NFT LLC. Phase 1 sold out in under 20 minutes, raising $480K. Collaborated with Solidity developers on contract-to-frontend integration.</div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-line"><div class="exp-dot"></div><div class="exp-stem"></div></div>
+        <div class="exp-content">
+          <div class="exp-role">Call Quality Specialist</div>
+          <div class="exp-company">Curative</div>
+          <div class="exp-date">Apr 2021 – May 2022</div>
+          <div class="exp-desc">Promoted from Customer Care to Quality Assurance. Evaluated agents for HIPAA compliance and contributed to building standardized evaluation frameworks alongside a team of five QA specialists.</div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-line"><div class="exp-dot"></div><div class="exp-stem"></div></div>
+        <div class="exp-content">
+          <div class="exp-role">Full Stack Web Development</div>
+          <div class="exp-company">Lambda School (BloomTech)</div>
+          <div class="exp-date">Jan 2020 – May 2021</div>
+          <div class="exp-desc">Completed intensive full-stack program covering JavaScript, React, Redux, Node.js, Express, SQL, Python, and Git.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Fady Gouda &nbsp;&middot;&nbsp; <a href="mailto:fadygouda123@gmail.com">fadygouda123@gmail.com</a> &nbsp;&middot;&nbsp; <a href="https://github.com/fadygouda" target="_blank">github.com/fadygouda</a> &nbsp;&middot;&nbsp; <a href="https://www.linkedin.com/in/gouda-93/" target="_blank">LinkedIn</a></p>
+</footer>
+
+</body>
+</html>
